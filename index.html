@@ -4,313 +4,461 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>PriceMyService</title>
+<title>PriceMyService</title>
 
-  <style>
+<style>
 
-    * {
+*{box-sizing:border-box}
 
-      box-sizing: border-box;
+body{
 
-    }
+  margin:0;
 
-    body {
+  font-family:Arial,sans-serif;
 
-      margin: 0;
+  background:#f6f7fb;
 
-      font-family: Arial, sans-serif;
+  color:#171717;
 
-      background: #f5f5f5;
+}
 
-      color: #111;
+.container{
 
-    }
+  max-width:650px;
 
-    .container {
+  margin:auto;
 
-      max-width: 600px;
+  padding:25px 18px 50px;
 
-      margin: auto;
+}
 
-      padding: 30px 20px;
+header{
 
-    }
+  text-align:center;
 
-    .logo {
+  padding:25px 0 30px;
 
-      text-align: center;
+}
 
-      font-size: 28px;
+.logo{
 
-      font-weight: bold;
+  font-size:30px;
 
-      margin-bottom: 10px;
+  font-weight:800;
 
-    }
+  letter-spacing:-1px;
 
-    .subtitle {
+}
 
-      text-align: center;
+.tagline{
 
-      color: #666;
+  margin-top:8px;
 
-      margin-bottom: 30px;
+  color:#777;
 
-    }
+  font-size:15px;
 
-    .card {
+}
 
-      background: white;
+.card{
 
-      padding: 25px;
+  background:white;
 
-      border-radius: 18px;
+  padding:24px;
 
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  border-radius:22px;
 
-    }
+  box-shadow:0 10px 35px rgba(0,0,0,.07);
 
-    label {
+}
 
-      display: block;
+h2{
 
-      font-weight: bold;
+  margin-top:0;
 
-      margin-top: 15px;
+  font-size:22px;
 
-      margin-bottom: 7px;
+}
 
-    }
+label{
 
-    input,
+  display:block;
 
-    select {
+  margin:17px 0 7px;
 
-      width: 100%;
+  font-weight:700;
 
-      padding: 13px;
+  font-size:14px;
 
-      border: 1px solid #ddd;
+}
 
-      border-radius: 10px;
+input,select{
 
-      font-size: 16px;
+  width:100%;
 
-    }
+  padding:14px;
 
-    button {
+  border:1px solid #ddd;
 
-      width: 100%;
+  border-radius:11px;
 
-      padding: 15px;
+  font-size:16px;
 
-      margin-top: 20px;
+  outline:none;
 
-      border: none;
+}
 
-      border-radius: 10px;
+input:focus,select:focus{
 
-      background: #111;
+  border-color:#111;
 
-      color: white;
+}
 
-      font-size: 17px;
+.calculate{
 
-      font-weight: bold;
+  width:100%;
 
-    }
+  margin-top:22px;
 
-    .result {
+  padding:15px;
 
-      display: none;
+  border:0;
 
-      margin-top: 20px;
+  border-radius:12px;
 
-      padding: 20px;
+  background:#111;
 
-      background: #111;
+  color:white;
 
-      color: white;
+  font-size:17px;
 
-      border-radius: 15px;
+  font-weight:700;
 
-      text-align: center;
+  cursor:pointer;
 
-    }
+}
 
-    .price {
+.result{
 
-      font-size: 42px;
+  display:none;
 
-      font-weight: bold;
+  margin-top:22px;
 
-      margin: 10px 0;
+  padding:24px;
 
-    }
+  border-radius:18px;
 
-    .details {
+  background:#111;
 
-      margin-top: 15px;
+  color:white;
 
-      text-align: left;
+}
 
-      line-height: 1.8;
+.result-title{
 
-      color: #ddd;
+  color:#bbb;
 
-    }
+  font-size:14px;
 
-    footer {
+}
 
-      text-align: center;
+.price{
 
-      margin-top: 30px;
+  font-size:48px;
 
-      color: #777;
+  font-weight:800;
 
-      font-size: 13px;
+  margin:6px 0 20px;
 
-    }
+}
 
-  </style>
+.line{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  padding:8px 0;
+
+  border-bottom:1px solid #333;
+
+  color:#ccc;
+
+}
+
+.line strong{
+
+  color:white;
+
+}
+
+.share{
+
+  width:100%;
+
+  margin-top:18px;
+
+  padding:13px;
+
+  border:1px solid #555;
+
+  border-radius:11px;
+
+  background:transparent;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+footer{
+
+  text-align:center;
+
+  margin-top:30px;
+
+  color:#888;
+
+  font-size:13px;
+
+}
+
+@media(max-width:500px){
+
+  .card{padding:20px}
+
+  .price{font-size:42px}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="logo">PriceMyService</div>
+<header>
 
-    <div class="subtitle">
+  <div class="logo">PriceMyService</div>
 
-      Calculate the right price for your service.
+  <div class="tagline">
 
-    </div>
-
-    <div class="card">
-
-      <label>Service Name</label>
-
-      <input id="service" type="text" placeholder="Example: Hair Coloring">
-
-      <label>Hours Worked</label>
-
-      <input id="hours" type="number" placeholder="2">
-
-      <label>Hourly Rate ($)</label>
-
-      <input id="rate" type="number" placeholder="15">
-
-      <label>Material Cost ($)</label>
-
-      <input id="materials" type="number" placeholder="10">
-
-      <label>Profit Margin</label>
-
-      <select id="margin">
-
-        <option value="20">20%</option>
-
-        <option value="30" selected>30%</option>
-
-        <option value="40">40%</option>
-
-        <option value="50">50%</option>
-
-        <option value="60">60%</option>
-
-      </select>
-
-      <button onclick="calculatePrice()">
-
-        Calculate My Price
-
-      </button>
-
-      <div id="result" class="result">
-
-        <div>Recommended Price</div>
-
-        <div id="price" class="price">
-
-          $0.00
-
-        </div>
-
-        <div class="details">
-
-          Labor: $<span id="labor">0.00</span><br>
-
-          Materials: $<span id="materialResult">0.00</span><br>
-
-          Profit: $<span id="profit">0.00</span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <footer>
-
-      PriceMyService © 2026
-
-    </footer>
+    Know your costs. Set your price. Grow your business.
 
   </div>
 
+</header>
+
+<div class="card">
+
+<h2>Calculate Your Service Price</h2>
+
+<label>Service Name</label>
+
+<input id="service" type="text" placeholder="Example: Hair Coloring">
+
+<label>Hours Worked</label>
+
+<input id="hours" type="number" min="0" step="0.25" placeholder="2">
+
+<label>Hourly Rate ($)</label>
+
+<input id="rate" type="number" min="0" step="0.01" placeholder="15">
+
+<label>Material Cost ($)</label>
+
+<input id="materials" type="number" min="0" step="0.01" placeholder="10">
+
+<label>Profit Margin</label>
+
+<select id="margin">
+
+<option value="20">20%</option>
+
+<option value="30" selected>30%</option>
+
+<option value="40">40%</option>
+
+<option value="50">50%</option>
+
+<option value="60">60%</option>
+
+</select>
+
+<button class="calculate" onclick="calculatePrice()">
+
+Calculate My Price
+
+</button>
+
+<div id="result" class="result">
+
+<div class="result-title">
+
+Recommended Price
+
+</div>
+
+<div id="price" class="price">
+
+$0.00
+
+</div>
+
+<div class="line">
+
+<span>Labor</span>
+
+<strong>$<span id="labor">0.00</span></strong>
+
+</div>
+
+<div class="line">
+
+<span>Materials</span>
+
+<strong>$<span id="materialResult">0.00</span></strong>
+
+</div>
+
+<div class="line">
+
+<span>Profit</span>
+
+<strong>$<span id="profit">0.00</span></strong>
+
+</div>
+
+<button class="share" onclick="shareResult()">
+
+Share Result
+
+</button>
+
+</div>
+
+</div>
+
+<footer>
+
+PriceMyService © 2026
+
+</footer>
+
+</div>
+
 <script>
 
-function calculatePrice() {
+function calculatePrice(){
 
-  const hours =
+const service =
 
-    Number(document.getElementById("hours").value) || 0;
+document.getElementById("service").value || "My Service";
 
-  const rate =
+const hours =
 
-    Number(document.getElementById("rate").value) || 0;
+Number(document.getElementById("hours").value) || 0;
 
-  const materials =
+const rate =
 
-    Number(document.getElementById("materials").value) || 0;
+Number(document.getElementById("rate").value) || 0;
 
-  const margin =
+const materials =
 
-    Number(document.getElementById("margin").value) / 100;
+Number(document.getElementById("materials").value) || 0;
 
-  const labor = hours * rate;
+const margin =
 
-  const baseCost = labor + materials;
+Number(document.getElementById("margin").value) / 100;
 
-  const finalPrice = baseCost / (1 - margin);
+const labor = hours * rate;
 
-  const profit = finalPrice - baseCost;
+const baseCost = labor + materials;
 
-  document.getElementById("price").innerText =
+if(baseCost === 0){
 
-    "$" + finalPrice.toFixed(2);
+alert("Please enter your costs first.");
 
-  document.getElementById("labor").innerText =
+return;
 
-    labor.toFixed(2);
+}
 
-  document.getElementById("materialResult").innerText =
+const finalPrice =
 
-    materials.toFixed(2);
+baseCost / (1 - margin);
 
-  document.getElementById("profit").innerText =
+const profit =
 
-    profit.toFixed(2);
+finalPrice - baseCost;
 
-  document.getElementById("result").style.display =
+document.getElementById("price").innerText =
 
-    "block";
+"$" + finalPrice.toFixed(2);
+
+document.getElementById("labor").innerText =
+
+labor.toFixed(2);
+
+document.getElementById("materialResult").innerText =
+
+materials.toFixed(2);
+
+document.getElementById("profit").innerText =
+
+profit.toFixed(2);
+
+document.getElementById("result").style.display =
+
+"block";
+
+window.currentResult =
+
+service + " — Recommended price: $" +
+
+finalPrice.toFixed(2);
+
+}
+
+async function shareResult(){
+
+if(!window.currentResult){
+
+return;
+
+}
+
+if(navigator.share){
+
+await navigator.share({
+
+title:"PriceMyService",
+
+text:window.currentResult,
+
+url:window.location.href
+
+});
+
+}else{
+
+await navigator.clipboard.writeText(
+
+window.currentResult
+
+);
+
+alert("Result copied!");
+
+}
 
 }
 

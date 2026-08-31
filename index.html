@@ -1,476 +1,235 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PriceMyService</title>
-
 <style>
-
 *{box-sizing:border-box}
-
 body{
-
   margin:0;
-
   font-family:Arial,sans-serif;
-
   background:#f6f7fb;
-
   color:#171717;
-
 }
-
 .container{
-
   max-width:650px;
-
   margin:auto;
-
   padding:25px 18px 50px;
-
 }
-
 header{
-
   text-align:center;
-
   padding:25px 0 30px;
-
 }
-
 .logo{
-
   font-size:30px;
-
   font-weight:800;
-
   letter-spacing:-1px;
-
 }
-
 .tagline{
-
   margin-top:8px;
-
   color:#777;
-
   font-size:15px;
-
 }
-
 .card{
-
   background:white;
-
   padding:24px;
-
   border-radius:22px;
-
   box-shadow:0 10px 35px rgba(0,0,0,.07);
-
 }
-
 h2{
-
   margin-top:0;
-
   font-size:22px;
-
 }
-
 label{
-
   display:block;
-
   margin:17px 0 7px;
-
   font-weight:700;
-
   font-size:14px;
-
 }
-
 input,select{
-
   width:100%;
-
   padding:14px;
-
   border:1px solid #ddd;
-
   border-radius:11px;
-
   font-size:16px;
-
   outline:none;
-
 }
-
 input:focus,select:focus{
-
   border-color:#111;
-
 }
-
 .calculate{
-
   width:100%;
-
   margin-top:22px;
-
   padding:15px;
-
   border:0;
-
   border-radius:12px;
-
   background:#111;
-
   color:white;
-
   font-size:17px;
-
   font-weight:700;
-
   cursor:pointer;
-
 }
-
 .result{
-
   display:none;
-
   margin-top:22px;
-
   padding:24px;
-
   border-radius:18px;
-
   background:#111;
-
   color:white;
-
 }
-
 .result-title{
-
   color:#bbb;
-
   font-size:14px;
-
 }
-
 .price{
-
   font-size:48px;
-
   font-weight:800;
-
   margin:6px 0 20px;
-
 }
-
 .line{
-
   display:flex;
-
   justify-content:space-between;
-
   padding:8px 0;
-
   border-bottom:1px solid #333;
-
   color:#ccc;
-
 }
-
 .line strong{
-
   color:white;
-
 }
-
 .share{
-
   width:100%;
-
   margin-top:18px;
-
   padding:13px;
-
   border:1px solid #555;
-
   border-radius:11px;
-
   background:transparent;
-
   color:white;
-
   font-weight:700;
-
   cursor:pointer;
-
 }
-
 footer{
-
   text-align:center;
-
   margin-top:30px;
-
   color:#888;
-
   font-size:13px;
-
 }
-
 @media(max-width:500px){
-
   .card{padding:20px}
-
   .price{font-size:42px}
-
 }
-
 </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
 <header>
-
   <div class="logo">PriceMyService</div>
-
   <div class="tagline">
-
     Know your costs. Set your price. Grow your business.
-
   </div>
-
 </header>
-
 <div class="card">
-
 <h2>Calculate Your Service Price</h2>
-
 <label>Service Name</label>
-
 <input id="service" type="text" placeholder="Example: Hair Coloring">
-
 <label>Hours Worked</label>
-
 <input id="hours" type="number" min="0" step="0.25" placeholder="2">
-
 <label>Hourly Rate ($)</label>
-
 <input id="rate" type="number" min="0" step="0.01" placeholder="15">
-
 <label>Material Cost ($)</label>
-
 <input id="materials" type="number" min="0" step="0.01" placeholder="10">
-
 <label>Profit Margin</label>
-
 <select id="margin">
-
 <option value="20">20%</option>
-
 <option value="30" selected>30%</option>
-
 <option value="40">40%</option>
-
 <option value="50">50%</option>
-
 <option value="60">60%</option>
-
 </select>
-
 <button class="calculate" onclick="calculatePrice()">
-
 Calculate My Price
-
 </button>
-
 <div id="result" class="result">
-
 <div class="result-title">
-
 Recommended Price
-
 </div>
-
 <div id="price" class="price">
-
 $0.00
-
 </div>
-
 <div class="line">
-
 <span>Labor</span>
-
 <strong>$<span id="labor">0.00</span></strong>
-
 </div>
-
 <div class="line">
-
 <span>Materials</span>
-
 <strong>$<span id="materialResult">0.00</span></strong>
-
 </div>
-
 <div class="line">
-
 <span>Profit</span>
-
 <strong>$<span id="profit">0.00</span></strong>
-
 </div>
-
 <button class="share" onclick="shareResult()">
-
 Share Result
-
 </button>
-
 </div>
-
 </div>
-
 <footer>
-
 PriceMyService © 2026
-
 </footer>
-
 </div>
-
 <script>
-
 function calculatePrice(){
-
 const service =
-
 document.getElementById("service").value || "My Service";
-
 const hours =
-
 Number(document.getElementById("hours").value) || 0;
-
 const rate =
-
 Number(document.getElementById("rate").value) || 0;
-
 const materials =
-
 Number(document.getElementById("materials").value) || 0;
-
 const margin =
-
 Number(document.getElementById("margin").value) / 100;
-
 const labor = hours * rate;
-
 const baseCost = labor + materials;
-
 if(baseCost === 0){
-
 alert("Please enter your costs first.");
-
 return;
-
 }
-
 const finalPrice =
-
 baseCost / (1 - margin);
-
 const profit =
-
 finalPrice - baseCost;
-
 document.getElementById("price").innerText =
-
 "$" + finalPrice.toFixed(2);
-
 document.getElementById("labor").innerText =
-
 labor.toFixed(2);
-
 document.getElementById("materialResult").innerText =
-
 materials.toFixed(2);
-
 document.getElementById("profit").innerText =
-
 profit.toFixed(2);
-
 document.getElementById("result").style.display =
-
 "block";
-
 window.currentResult =
-
 service + " — Recommended price: $" +
-
 finalPrice.toFixed(2);
-
 }
-
 async function shareResult(){
-
 if(!window.currentResult){
-
 return;
-
 }
-
 if(navigator.share){
-
 await navigator.share({
-
 title:"PriceMyService",
-
 text:window.currentResult,
-
 url:window.location.href
-
 });
-
 }else{
-
 await navigator.clipboard.writeText(
-
 window.currentResult
-
 );
-
 alert("Result copied!");
-
 }
-
-}
-
-</script>
-<button onclick="signInWithGoogle()">Continue with Google</button>
-
-<script>
-function signInWithGoogle() {
-  window.location.href =
-    "https://codserosgkwaumvrpfdz.supabase.co/auth/v1/authorize?provider=google";
 }
 </script>
 </body>
-
 </html>

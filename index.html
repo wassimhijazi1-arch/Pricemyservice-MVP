@@ -463,7 +463,14 @@ alert("Result copied!");
 }
 
 </script>
+<button onclick="signInWithGoogle()">Continue with Google</button>
 
+<script>
+function signInWithGoogle() {
+  window.location.href =
+    "https://codserosgkwaumvrpfdz.supabase.co/auth/v1/authorize?provider=google";
+}
+</script>
 </body>
 
 </html>
